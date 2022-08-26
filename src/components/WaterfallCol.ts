@@ -6,23 +6,25 @@ import { WaterfallColOptions } from '../options'
 export const WaterfallCol = defineComponent({
   name: 'WaterfallCol',
   props: WaterfallColOptions,
-  setup(props) {
+  setup(props, { slots }) {
     return () => {
       const style: StyleValue = { boxSizing: 'border-box' }
 
       return h(
         TransitionGroup,
         null,
-        props.dataList?.map(item => h(
-          'div',
-          {
-            ...item,
-            style,
-          },
-          [
-            props.slot?.({ data: item.data, order: item.order }),
-          ],
-        )),
+        {
+          default: () => props.dataList?.map(item => h(
+            'div',
+            {
+              ...item,
+              style,
+            },
+            {
+              default: () => slots.default?.({ data: item.data, order: item.order }),
+            },
+          )),
+        },
       )
     }
   },

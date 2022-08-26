@@ -67,20 +67,23 @@ export const Waterfall = defineComponent({
         {
           style: style.value,
         },
-        columns.value.map((column: any) => h(
-          'div',
-          {
-            style: columnStyle.value,
-          },
-          [h(
-            WaterfallCol,
+        {
+          default: () => columns.value.map((column: any) => h(
+            'div',
             {
-
-              dataList: column,
-              slot: slots.default,
+              style: columnStyle.value,
             },
-          )],
-        )),
+            [h(
+              WaterfallCol,
+              {
+                dataList: column,
+              },
+              {
+                default: (scope: any) => slots.default?.(scope),
+              },
+            )],
+          )),
+        },
       )
     }
   },

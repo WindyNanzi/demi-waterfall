@@ -1,4 +1,4 @@
-import type { PropType, Slot } from 'vue-demi'
+import type { PropType } from 'vue-demi'
 import type { WaterfallBreakAt, WaterfallItem, WaterfallResponsive } from './types'
 
 /**
@@ -38,10 +38,6 @@ export const options = {
 export const WaterfallColOptions = {
   dataList: {
     type: Array as PropType<Array<WaterfallItem>>,
-    required: true,
-  },
-  slot: {
-    type: Function as PropType<Slot>,
     required: true,
   },
 }
