@@ -1,17 +1,17 @@
 {
-  "name": "vue-component-template",
+  "name": "demi-waterfall",
   "version": "0.1.0",
   "packageManager": "pnpm@7.2.1",
-  "description": "用于编写 vue 组件的模板，参照 Anthony Fu 的 Vue Statport 项目",
+  "description": "支持vue2 与 vue3 的瀑布流组件",
   "author": "WindyNanzi <hanqiao1024@163.com>",
   "license": "MIT",
-  "homepage": "https://github.com/WindyNanzi/vue-component-template#readme",
+  "homepage": "https://github.com/WindyNanzi/demi-waterfall#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WindyNanzi/vue-component-template.git"
+    "url": "git+https://github.com/WindyNanzi/demi-waterfall.git"
   },
   "bugs": {
-    "url": "https://github.com/WindyNanzi/vue-component-template/issues"
+    "url": "https://github.com/WindyNanzi/demi-waterfall/issues"
   },
   "keywords": [
     "vue",
