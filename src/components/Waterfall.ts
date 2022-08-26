@@ -73,7 +73,7 @@ export const Waterfall = defineComponent({
             {
               style: columnStyle.value,
             },
-            [h(
+            h(
               WaterfallCol,
               {
                 dataList: column,
@@ -81,7 +81,7 @@ export const Waterfall = defineComponent({
               {
                 default: (scope: any) => slots.default?.(scope),
               },
-            )],
+            ),
           )),
         },
       )
