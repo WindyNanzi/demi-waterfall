@@ -41,7 +41,7 @@ export const WaterfallColOptions = {
     required: true,
   },
   slot: {
-    type: Object as PropType<Slot>,
+    type: Function as PropType<Slot>,
     required: true,
   },
 }
