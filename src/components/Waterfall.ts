@@ -6,6 +6,7 @@ import { useCurrentScreen } from '../composables'
 import { InjectionOptions } from '../constants'
 import { defaultBreakAt, options } from '../options'
 import type { ScreenType, WaterfallItem, WaterfallOptions } from '../types'
+import { removeInvalidProps } from '../utils'
 import { WaterfallCol } from './WaterfallCol'
 
 export const Waterfall = defineComponent({
@@ -15,8 +16,9 @@ export const Waterfall = defineComponent({
     const sp = inject(InjectionOptions)
     const options = {
       ...sp,
-      ...props,
+      ...removeInvalidProps(props),
     }
+
     const style = computed((): StyleValue => {
       return {
         display: 'flex',

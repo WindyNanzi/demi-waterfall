@@ -28,12 +28,10 @@ export const options = {
   responsive: {
     type: Object as PropType<WaterfallResponsive>,
     required: false,
-    default: () => defaultResponsive,
   },
   breakAt: {
     type: Object as PropType<WaterfallBreakAt>,
     required: false,
-    default: () => defaultBreakAt,
   },
 }
 
