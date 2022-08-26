@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import list from '../assets/imageInfos'
+
+const handleClick = (data: any) => {
+  alert(`${data.title}说：爱你鸭~小周周！`)
+}
 </script>
 
 <template>
@@ -7,7 +11,7 @@ import list from '../assets/imageInfos'
     <div flex-1>
       <Waterfall :data-list="list">
         <template #default="scope">
-          <image-card :key="scope.data.src" v-bind="scope.data" />
+          <image-card :key="scope.data.src" v-bind="scope.data" @click="handleClick(scope.data)" />
         </template>
       </Waterfall>
     </div>
