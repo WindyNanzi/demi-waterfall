@@ -1,0 +1,6 @@
+{
+  "unocss.root": "playground/unocss.config.ts",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}

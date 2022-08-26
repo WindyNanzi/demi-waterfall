@@ -1,0 +1,66 @@
+{
+  "name": "vue-component-template",
+  "version": "0.1.0",
+  "packageManager": "pnpm@7.2.1",
+  "description": "用于编写 vue 组件的模板，参照 Anthony Fu 的 Vue Statport 项目",
+  "author": "WindyNanzi <hanqiao1024@163.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/WindyNanzi/vue-component-template#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WindyNanzi/vue-component-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WindyNanzi/vue-component-template/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue-demi",
+    "vue-component"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pkgroll",
+    "dev": "pkgroll --watch",
+    "play": "vite playground --open",
+    "play:build": "vite build playground",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest",
+    "test:e2e": "cypress open",
+    "prepublishOnly": "nr build",
+    "release": "bumpp --commit --tag --push && pnpm publish"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.1.0",
+    "vue-demi": "^0.13.7"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.26.1",
+    "@antfu/ni": "^0.17.2",
+    "@types/node": "^18.7.1",
+    "bumpp": "^8.2.1",
+    "cypress": "^10.4.0",
+    "eslint": "^8.21.0",
+    "nanoid": "^4.0.0",
+    "pkgroll": "^1.4.0",
+    "pnpm": "^7.9.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.5",
+    "vitest": "^0.21.1",
+    "vue-router": "^4.1.3",
+    "vue-tsc": "^0.40.1"
+  }
+}
