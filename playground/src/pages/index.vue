@@ -11,9 +11,19 @@ const handleClick = (data: any) => {
     <div flex-1>
       <Waterfall :data-list="list">
         <template #default="scope">
-          <image-card :key="scope.data.src" v-bind="scope.data" @click="handleClick(scope.data)" />
+          <image-card
+            :key="scope.data.src"
+            v-bind="scope.data"
+            @click="handleClick(scope.data)"
+          />
         </template>
       </Waterfall>
     </div>
   </div>
 </template>
+
+<style scoped>
+:deep(.waterfall-move) {
+  transition: transform 600ms ease-in-out 50ms;
+}
+</style>

@@ -40,14 +40,15 @@ export const Waterfall = defineComponent({
       return `calc(${percent}% - ${gapWidth}rem)`
     })
 
+    const dataList = (props.dataList || []).map((item: any) => ({ val: item, key: nanoid() }))
+
     const columns = computed(() => {
       const columnLength = unref(col)!
       const list: Array<Array<WaterfallItem>> = Array.from(new Array(columnLength), () => [])
 
-      const data = (props.dataList || []).map((item: any) => ({ val: item, key: nanoid() }))
-      for (let i = 0, len = data.length; i < len; i++) {
+      for (let i = 0, len = dataList.length; i < len; i++) {
         const pushIndex = i % columnLength
-        list[pushIndex].push({ data: data[i].val, order: pushIndex, key: data[i].key })
+        list[pushIndex].push({ data: dataList[i].val, order: pushIndex, key: dataList[i].key })
       }
       return list
     })
@@ -58,6 +59,7 @@ export const Waterfall = defineComponent({
         flexDirection: 'column',
         gap: `${props.gap}rem`,
         width: unref(columnWidth),
+        position: 'relative',
       }
     })
 

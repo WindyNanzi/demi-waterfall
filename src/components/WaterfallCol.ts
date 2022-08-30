@@ -12,7 +12,7 @@ export const WaterfallCol = defineComponent({
 
       return h(
         TransitionGroup,
-        null,
+        { name: 'waterfall' },
         {
           default: () => props.dataList?.map(item => h(
             'div',
