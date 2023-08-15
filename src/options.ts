@@ -1,5 +1,5 @@
 import type { PropType } from 'vue-demi'
-import type { WaterfallBreakAt, WaterfallItem, WaterfallResponsive } from './types'
+import type { WaterfallBreakAt, WaterfallResponsive } from './types'
 
 /**
  * 默认的响应式
@@ -35,24 +35,13 @@ export const options = {
   },
 }
 
-export const WaterfallColOptions = {
-  dataList: {
-    type: Array as PropType<Array<WaterfallItem>>,
-    required: true,
-  },
-}
-
 export const WaterfallItemOptions = {
   data: {
     type: Object as PropType<any>,
     required: true,
   },
-  key: {
+  to: {
     type: String,
-    required: true,
-  },
-  order: {
-    type: Number,
     required: true,
   },
 }

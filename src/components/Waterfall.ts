@@ -1,13 +1,14 @@
 import { nanoid } from 'nanoid/non-secure'
 import type { DefineComponent, StyleValue } from 'vue-demi'
-import { computed, defineComponent, h, inject, unref } from 'vue-demi'
+import { computed, defineComponent, h, inject, nextTick, ref, unref, watch } from 'vue-demi'
 
 import { useCurrentScreen } from '../composables'
 import { InjectionOptions } from '../constants'
 import { defaultBreakAt, options } from '../options'
-import type { ScreenType, WaterfallItem, WaterfallOptions } from '../types'
+import type { ScreenType, WaterfallItemOptions, WaterfallOptions } from '../types'
+
 import { removeInvalidProps } from '../utils'
-import { WaterfallCol } from './WaterfallCol'
+import { WaterfallItem } from './WaterfallItems'
 
 export const Waterfall = defineComponent({
   name: 'Waterfall',
@@ -40,18 +41,30 @@ export const Waterfall = defineComponent({
       return `calc(${percent}% - ${gapWidth}rem)`
     })
 
-    const dataList = (props.dataList || []).map((item: any) => ({ val: item, key: nanoid() }))
+    const dataList = (props.dataList || []).map((item: any) => ({ val: item, key: nanoid(10) }))
 
-    const columns = computed(() => {
-      const columnLength = unref(col)!
-      const list: Array<Array<WaterfallItem>> = Array.from(new Array(columnLength), () => [])
+    const columnPortNames = ref([] as Array<string>)
 
-      for (let i = 0, len = dataList.length; i < len; i++) {
-        const pushIndex = i % columnLength
-        list[pushIndex].push({ data: dataList[i].val, order: pushIndex, key: dataList[i].key })
-      }
-      return list
-    })
+    const waterfallItems = ref([] as Array<WaterfallItemOptions>)
+
+    watch(
+      () => col.value,
+      (len) => {
+        const newItems: Array<WaterfallItemOptions> = []
+        const portNames = [] as Array<string>
+        for (let i = 0; i < unref(col); i++)
+          portNames.push(nanoid(10))
+
+        columnPortNames.value = portNames
+
+        for (let i = 0; i < dataList.length; i++) {
+          const pushIndex = i % len
+          newItems.push({ data: dataList[i].val, key: dataList[i].key, to: portNames[pushIndex] })
+        }
+        nextTick(() => waterfallItems.value = newItems)
+      },
+      { immediate: true },
+    )
 
     const columnStyle = computed((): StyleValue => {
       return {
@@ -69,23 +82,24 @@ export const Waterfall = defineComponent({
         {
           style: style.value,
         },
-        {
-          default: () => columns.value.map((column: any) => h(
+        [
+          columnPortNames.value.map((port: string) => h(
             'div',
             {
               style: columnStyle.value,
+              port,
+            }),
+          ),
+          waterfallItems.value.map((waterfallItem: WaterfallItemOptions) => h(
+            WaterfallItem,
+            {
+              ...waterfallItem,
             },
-            h(
-              WaterfallCol,
-              {
-                dataList: column,
-              },
-              {
-                default: (scope: any) => slots.default?.(scope),
-              },
-            ),
+            {
+              default: (scope: any) => slots.default?.(scope),
+            },
           )),
-        },
+        ],
       )
     }
   },

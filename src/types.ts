@@ -32,8 +32,8 @@ export interface WaterfallOptions extends WaterfallPluginOption {
   gap?: number
 }
 
-export interface WaterfallItem {
+export interface WaterfallItemOptions {
   data: any
-  order: number
   key: string
+  to: string
 }
